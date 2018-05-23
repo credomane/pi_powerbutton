@@ -1,0 +1,14 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides: pi_powerbutton
+# Required-Start: $remote_fs $syslog
+# Required-Stop: $remote_fs $syslog
+# Default-Start: S
+# Default-Stop: 
+# Short-Description: Restart/Shutdown on GPIO trigger
+# Description: Python script listens for GPIO and runs reboot/shutdown command
+### END INIT INFO
+
+#TODO: EVERYTHING!
+
+#python /opt/pi_powerbutton/pi_powerbutton.py
