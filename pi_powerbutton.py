@@ -89,7 +89,7 @@ except AttributeError:
 #---------------------------------------
 #replace substitution value in certain locale.
 #---------------------------------------
-locale.action_restart = locale.action_restart.replace("%", str(config.delay_before_performing_action))
+locale.action_restart = locale.action_restart.replace("%1", str(config.delay_before_performing_action))
 locale.action_shutdown = locale.action_shutdown.replace("%1", str(config.delay_before_performing_action))
 
 #---------------------------------------
