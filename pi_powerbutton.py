@@ -5,10 +5,15 @@ import subprocess
 import os
 
 #---------------------------------------
+#cd into pi_powerbutton's directory.
+#---------------------------------------
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
+#---------------------------------------
 #load config file
 #---------------------------------------
 config = {}
-with open("./pi_powerbutton.cfg") as myfile:
+with open("/etc/pi_powerbutton") as myfile:
     for line in myfile:
         name, var = line.partition("=")[::2]
         config[name.strip()] = var.strip()
