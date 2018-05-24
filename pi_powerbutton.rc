@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 ### BEGIN INIT INFO
 # Provides: pi_powerbutton
 # Required-Start: $remote_fs $syslog
@@ -29,17 +29,17 @@ is_running(){
 }
 
 pb_start() {
-    if [ is_running -eq 1 ]; then
-        echo "pi_powerbutton is already running!"
-    else
+    if is_running; then
         echo "Starting pi_powerbutton..."
         echo $$ > $PIDFILE
         exec python $PYFILE
+    else
+        echo "pi_powerbutton is already running!"
     fi
 }
 
 pb_stop() {
-    if [ is_running -eq 0 ]; then
+    if is_running; then
         echo "pi_powerbutton is already stopped!"
     else
         echo "Stopping pi_powerbutton."
@@ -62,10 +62,10 @@ case "${1}" in
     ;;
 
     status)
-        if [ is_running -eq 1 ]; then
-            PBSTAT=running
-        else
+        if is_running; then
             PBSTAT=stopped
+        else
+            PBSTAT=running
         fi
         echo "pi_powerbutton is ${PBSTAT}."
     ;;
