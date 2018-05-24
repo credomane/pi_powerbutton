@@ -105,7 +105,7 @@ GPIO.setup(config.rpi_gpio_pin, GPIO.IN)
 
 #Special vars
 buttonWasPressed = False
-sleepTimer = 0.5
+sleepTimer = 0.250
 
 #Used to decide if we should reboot or shutdown
 actionEnabled = False
@@ -179,9 +179,9 @@ while True:
 
     time.sleep(sleepTimer)
     if choiceTimeLeft > 0:
-        choiceTimeLeft -= sleepTimer
+        choiceTimeLeft -= 1
     if actionTimeLeft > 0:
-        actionTimeLeft -= sleepTimer
+        actionTimeLeft -= 1
 
 
 
