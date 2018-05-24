@@ -20,13 +20,13 @@ install:
 	mkdir -p /opt/pi_powerbutton/
 	/bin/cp -rf ./pi_powerbutton.py /opt/pi_powerbutton/
 
-	mkdir /opt/pi_powerbutton/locale/
+	mkdir -p /opt/pi_powerbutton/locale/
 	/bin/cp -rf ./locale/*.cfg /opt/pi_powerbutton/locale/
 
 	/bin/cp -rf ./pi_powerbutton.rc /etc/init.d/pi_powerbutton
 	chmod +x /etc/init.d/pi_powerbutton
 
-	chown -r root.root /opt/pi_powerbutton/
+	chown -R root.root /opt/pi_powerbutton/
 
 	update-rc.d pi_powerbutton defaults
 
