@@ -187,9 +187,9 @@ while True:
         actionTimeLeft = 0
         if actionEnabled:
             if actionAction == "restart":
-                print "Restarting now..."
+                subprocess.call("shutdown -r now", shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, close_fds=True)
             elif actionAction == "shutdown":
-                print "Shutting down now..."
+                subprocess.call("shutdown -h now", shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, close_fds=True)
             sys.exit(0)
 
     time.sleep(sleepTimer)
