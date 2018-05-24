@@ -9,6 +9,69 @@
 # Description: Python script listens for GPIO and runs reboot/shutdown command
 ### END INIT INFO
 
-#TODO: EVERYTHING!
+PIDFILE=/var/run/pi_powerbutton
+PYFILE=/opt/pi_powerbutton/pi_powerbutton.py
 
-#python /opt/pi_powerbutton/pi_powerbutton.py
+is_running(){
+    if [ -f $PIDFILE ] ; then
+        #PID found. Is pb still running?
+        if ps -p $PID 2&>1 /dev/null ; then
+            #pb is still running!
+            return 1
+        else
+            #Stale PID file; Just remove it.
+            rm $PIDFILE
+        fi
+    fi
+
+    #Appears that pb is stopped
+    return 0
+}
+
+pb_start() {
+    if [ is_running -eq 1 ]; then
+        echo "pi_powerbutton is already running!"
+    else
+        echo "Starting pi_powerbutton..."
+        echo $$ > $PIDFILE
+        exec python $PYFILE
+    fi
+}
+
+pb_stop() {
+    if [ is_running -eq 0 ]; then
+        echo "pi_powerbutton is already stopped!"
+    else
+        echo "Stopping pi_powerbutton."
+        pkill -15 -F $PIDFILE
+    fi
+}
+
+case "${1}" in
+    stop)
+        pb_stop
+    ;;
+
+    start)
+        pb_start
+    ;;
+
+    restart)
+        pb_stop
+        pb_start
+    ;;
+
+    status)
+        if [ is_running -eq 1 ]; then
+            PBSTAT=running
+        else
+            PBSTAT=stopped
+        fi
+        echo "pi_powerbutton is ${PBSTAT}."
+    ;;
+
+    *)
+    echo "Usage: ${0:-} {start|stop|status|restart}" >&2
+    exit 1
+    ;;
+esac
