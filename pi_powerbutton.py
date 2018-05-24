@@ -133,30 +133,30 @@ while True:
             choiceSpoken = True
             choiceTimeLeft = choiceTimeStart
             if choiceAction == 0:
-                subprocess.Popen("espeak -v " + config.locale + " --stdout '"+ locale.choice_cancel + "' | aplay", shell=True, stdin=None, stdout=None, stderr=None, close_fds=True)
+                subprocess.Popen("espeak -v " + config.locale + " --stdout '"+ locale.choice_cancel + "' | aplay", shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, close_fds=True)
             elif choiceAction == 1:
-                subprocess.Popen("espeak -v " + config.locale + " --stdout '"+ locale.choice_restart + "' | aplay", shell=True, stdin=None, stdout=None, stderr=None, close_fds=True)
+                subprocess.Popen("espeak -v " + config.locale + " --stdout '"+ locale.choice_restart + "' | aplay", shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, close_fds=True)
             elif choiceAction == 2:
-                subprocess.Popen("espeak -v " + config.locale + " --stdout '"+ locale.choice_shutdown + "' | aplay", shell=True, stdin=None, stdout=None, stderr=None, close_fds=True)
+                subprocess.Popen("espeak -v " + config.locale + " --stdout '"+ locale.choice_shutdown + "' | aplay", shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, close_fds=True)
 
     #If the button was released perform an action.
     elif buttonWasPressed:
         buttonWasPressed = False
         if choiceAction == 0:
             if actionEnabled:
-                subprocess.Popen("espeak -v " + config.locale + " --stdout '"+ locale.action_canceled + "' | aplay", shell=True, stdin=None, stdout=None, stderr=None, close_fds=True)
+                subprocess.Popen("espeak -v " + config.locale + " --stdout '"+ locale.action_canceled + "' | aplay", shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, close_fds=True)
             else:
-                subprocess.Popen("espeak -v " + config.locale + " --stdout '"+ locale.nothing_to_cancel + "' | aplay", shell=True, stdin=None, stdout=None, stderr=None, close_fds=True)
+                subprocess.Popen("espeak -v " + config.locale + " --stdout '"+ locale.nothing_to_cancel + "' | aplay", shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, close_fds=True)
             actionEnabled = False
             actionAction = "cancel"
             actionTimeLeft = 0
         elif choiceAction == 1:
-            subprocess.call("espeak -v " + config.locale + " --stdout '"+ locale.action_restart + "' | aplay", shell=True, stdin=None, stdout=None, stderr=None, close_fds=True)
+            subprocess.call("espeak -v " + config.locale + " --stdout '"+ locale.action_restart + "' | aplay", shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, close_fds=True)
             actionEnabled = True
             actionAction = "restart"
             actionTimeLeft = actionTimeStart
         elif choiceAction == 2:
-            subprocess.call("espeak -v " + config.locale + " --stdout '"+ locale.action_shutdown + "' | aplay", shell=True, stdin=None, stdout=None, stderr=None, close_fds=True)
+            subprocess.call("espeak -v " + config.locale + " --stdout '"+ locale.action_shutdown + "' | aplay", shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, close_fds=True)
             actionEnabled = True
             actionAction = "shutdown"
             actionTimeLeft = actionTimeStart
