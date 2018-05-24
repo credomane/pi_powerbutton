@@ -11,7 +11,7 @@ all:
 
 dep:
 	apt-get update
-	apt-get install --yes python-rpi.gpio python3-rpi.gpio espeak
+	apt-get install python-rpi.gpio python3-rpi.gpio espeak
 
 install:
 	/bin/cp -n ./pi_powerbutton.cfg /etc/pi_powerbutton
